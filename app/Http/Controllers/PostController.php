@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -26,7 +26,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = Post::create([
+            'title' => $request->title,
+            'short_content' => $request->short_content,
+            'content' => $request->content,
+            // 'photo' => $request->photo,
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -34,7 +40,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show')->with('post',$post);
+        return view('posts.show')->with([
+            'post' => $post,
+            'recents_post' => Post::latest()->get()->except($post->id)->take(5)
+        ]);
     }
 
     /**
