@@ -14,13 +14,16 @@ class PageController extends Controller
     {
         return view('about');
     }
-    public function services(){
+    public function services()
+    {
         return view('services');
     }
-    public function project(){
+    public function project()
+    {
         return view('project');
     }
-    public function contact(){
+    public function contact()
+    {
         return view('contact');
     }
 }

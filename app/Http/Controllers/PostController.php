@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
       $posts = Post::all();
@@ -37,7 +34,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show')->with($post);
+        return view('posts.show')->with('post',$post);
     }
 
     /**
