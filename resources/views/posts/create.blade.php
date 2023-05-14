@@ -11,23 +11,29 @@
 <div class="w-50 d-flex justify-content-end">
     <div class="col-lg-7 mb-5 mb-lg-0">
         <div class="contact-form">
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="control-group">
-                    <input type="text" class="form-control p-4" name="title" placeholder="Sarlavha" required="required"/>
-                    <p class="help-block text-danger"></p>
+                    <input type="text" class="form-control p-4" name="title" placeholder="Sarlavha" value="{{ old('title') }}"/>
+                    @error('title')
+                    <p class="help-block text-danger ml-2">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="control-group">
-                    <textarea class="form-control p-4" rows="2" name="short_content" placeholder="Qisqacha mazmuni" required="required"></textarea>
-                    <p class="help-block text-danger"></p>
+                    <textarea class="form-control p-4 mt-3" rows="2" name="short_content" placeholder="Qisqacha mazmuni">{{ old('short_content') }}</textarea>
+                    @error('short_content')
+                    <p class="help-block text-danger ml-2">{{$message}}</p>
+                    @enderror
                 </div>
                 <div class="control-group">
-                    <textarea class="form-control p-4" rows="5" name="content" placeholder="Maqola" required="required"></textarea>
-                    <p class="help-block text-danger"></p>
+                    <textarea class="form-control p-4 mt-3" rows="5" name="content" placeholder="Maqola">{{ old('content') }}</textarea>
+                    @error('content')
+                    <p class="help-block text-danger ml-2">{{$message}}</p>
+                    @enderror
                 </div>
-                {{-- <div>
-                    <input type="file" name="photo">
-                </div> --}}
+                <div>
+                    <input type="file" class="mt-3 ml-3" name="photo" value="{{ old('file') }}">
+                </div>
                 <div>
                     <button class="btn btn-primary mt-5 btn-block py-3 px-5" type="submit" id="sendMessageButton">Saqlash</button>
                 </div>
