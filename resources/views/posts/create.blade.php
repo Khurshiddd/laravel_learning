@@ -31,8 +31,11 @@
                     <p class="help-block text-danger ml-2">{{$message}}</p>
                     @enderror
                 </div>
-                <div>
+                <div class="control-group">
                     <input type="file" class="mt-3 ml-3" name="photo" value="{{ old('file') }}">
+                    @error('photo')
+                    <p class="help-block text-danger ml-2">{{$message}}</p>
+                    @enderror
                 </div>
                 <div>
                     <button class="btn btn-primary mt-5 btn-block py-3 px-5" type="submit" id="sendMessageButton">Saqlash</button>
