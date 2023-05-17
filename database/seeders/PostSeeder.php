@@ -12,19 +12,6 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        Post::create([
-            'user_id' => 1,
-            'title' => 'First Post',
-            'short_content' => 'This is the body of the first post.',
-            'content' => 'contents',
-            'photo' => null
-        ]);
-        Post::create([
-            'user_id' => 1,
-            'title' => 'First Post',
-            'short_content' => 'This is the body of the first post.',
-            'content' => 'contents',
-            'photo' => null
-        ]);
+        Post::factory()->count(20)->create();
     }
 }

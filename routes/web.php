@@ -1,17 +1,8 @@
 <?php
-
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [\App\Http\Controllers\PageController::class,'main']);
 Route::get('about',[\App\Http\Controllers\PageController::class,'about'])->name('about');
@@ -19,7 +10,26 @@ Route::get('services',[\App\Http\Controllers\PageController::class,'services'])-
 Route::get('project',[\App\Http\Controllers\PageController::class,'project'])->name('project');
 Route::get('contact',[\App\Http\Controllers\PageController::class,'contact'])->name('contact');
 
-Route::resource('posts', \App\Http\Controllers\PostController::class);
+Route::resources([
+    'posts', PostController::class,
+    'comments', CommentController::class
+]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Route::get('posts', [\App\Http\Controllers\PostController::class,'index'])->name('posts.index');
 //Route::get('posts/{post}',[\App\Http\Controllers\PostController::class,'show'])->name('posts.show');

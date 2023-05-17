@@ -52,29 +52,26 @@
                 </div>
                 
                 <div class="bg-light rounded p-5">
-                    <h3 class="mb-4 section-title">Leave a comment</h3>
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-sm-6">
-                                <label for="name">Name *</label>
-                                <input type="text" class="form-control" id="name">
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="email">Email *</label>
-                                <input type="email" class="form-control" id="email">
-                            </div>
+                    <h3 class="mb-4 section-title">Izoh qoldirish</h3>
+                    {{-- <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label for="name">Name *</label>
+                            <input type="text" class="form-control" id="name">
                         </div>
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="url" class="form-control" id="website">
+                        <div class="form-group col-sm-6">
+                            <label for="email">Email *</label>
+                            <input type="email" class="form-control" id="email">
                         </div>
-                        
+                    </div> --}}
+                    <form action="{{route('comments.store')}}" method="POST">
+                        @csrf
                         <div class="form-group">
-                            <label for="message">Message *</label>
+                            <label for="message">Xabar</label>
                             <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
                         </div>
+                        <input type="hidden" name="post_id" value="{{$post->id}}">
                         <div class="form-group mb-0">
-                            <input type="submit" value="Leave Comment" class="btn btn-primary">
+                            <input type="submit" value="Yuborish" class="btn btn-primary">
                         </div>
                     </form>
                 </div>
