@@ -32,6 +32,13 @@
                     @enderror
                 </div>
                 <div class="control-group">
+                    <select name="category_id" class="form-select form-select-sm p-2 mt-3 ml-2">
+                        @foreach ($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="control-group">
                     <input type="file" class="mt-3 ml-3" name="photo" value="{{ old('file') }}">
                     @error('photo')
                     <p class="help-block text-danger ml-2">{{$message}}</p>

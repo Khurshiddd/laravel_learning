@@ -11,8 +11,9 @@ Route::get('project',[\App\Http\Controllers\PageController::class,'project'])->n
 Route::get('contact',[\App\Http\Controllers\PageController::class,'contact'])->name('contact');
 
 Route::resources([
-    'posts', PostController::class,
-    'comments', CommentController::class
+    'posts'=> PostController::class,
+    'comments'=> CommentController::class,
+    'users'=> UserController::class
 ]);
 
 
