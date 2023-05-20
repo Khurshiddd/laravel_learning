@@ -1,14 +1,21 @@
 <?php
+
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [\App\Http\Controllers\PageController::class,'main']);
-Route::get('about',[\App\Http\Controllers\PageController::class,'about'])->name('about');
-Route::get('services',[\App\Http\Controllers\PageController::class,'services'])->name('services');
-Route::get('project',[\App\Http\Controllers\PageController::class,'project'])->name('project');
-Route::get('contact',[\App\Http\Controllers\PageController::class,'contact'])->name('contact');
+Route::get('/', [PageController::class,'main'])->name('main');
+Route::get('about',[PageController::class,'about'])->name('about');
+Route::get('services',[PageController::class,'services'])->name('services');
+Route::get('project',[PageController::class,'project'])->name('project');
+Route::get('contact',[PageController::class,'contact'])->name('contact');
+
+Route::get('login',[AuthController::class,'login'])->name('login');
+Route::post('authenticate',[AuthController::class,'authenticate'])->name('authenticate');
+Route::post('logout',[AuthController::class,'logout'])->name('logout');
 
 Route::resources([
     'posts'=> PostController::class,
