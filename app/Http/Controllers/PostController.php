@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -24,7 +25,7 @@ class PostController extends Controller
         $posts = Post::latest()->paginate(6);
         return view('posts.index')->with('posts',$posts);
     }
-    
+
     /**
     * Show the form for creating a new resource.
     */
@@ -35,20 +36,17 @@ class PostController extends Controller
             'tags' => Tag::all(),
         ]);
     }
-    
-    /**
-    * Store a newly created resource in storage.
-    */
+
     public function store(StorePostRequest $request)
     {
         if($request->hasFile('photo')){
             $file = $request->file('photo');
             $name = $file->getClientOriginalName();
-            $path = $request->file('photo')->storeAs('files',$name);    
+            $path = $request->file('photo')->storeAs('files',$name);
         }
-        
+
         $post = Post::create([
-            'user_id' => 1,
+            'user_id' => auth()->user()->id,
             'category_id' => $request->category_id,
             'title' => $request->title,
             'short_content' => $request->short_content,
@@ -62,7 +60,7 @@ class PostController extends Controller
         }
         return redirect()->back();
     }
-    
+
     /**
     * Display the specified resource.
     */
@@ -75,27 +73,30 @@ class PostController extends Controller
             'tags' => Tag::all(),
         ]);
     }
-    
+
     /**
     * Show the form for editing the specified resource.
     */
     public function edit(Post $post)
     {
+        Gate::authorize('update', $post);
+
         return view('posts.edit')->with('post', $post);
     }
-    
+
     /**
     * Update the specified resource in storage.
     */
     public function update(StorePostRequest $request, Post $post)
     {
+        Gate::authorize('update', $post);
         if($request->hasFile('photo')){
             if(isset($post->photo)){
                 Storage::delete($post->photo);
             }
             $file = $request->file('photo');
             $name = $file->getClientOriginalName();
-            $path = $request->file('photo')->storeAs('files',$name);    
+            $path = $request->file('photo')->storeAs('files',$name);
         }
         $post->update([
             'title' => $request->title,
@@ -105,12 +106,13 @@ class PostController extends Controller
         ]);
         return redirect()->route('posts.show',['post'=>$post->id]);
     }
-    
+
     /**
     * Remove the specified resource from storage.
     */
     public function destroy(Post $post)
     {
+        Gate::authorize('delete',$post);
         if(isset($post->photo)){
             Storage::delete($post->photo);
         }

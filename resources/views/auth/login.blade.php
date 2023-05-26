@@ -1,47 +1,169 @@
-<x-layouts.auth>
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
-      
-                  <div class="mb-md-5 mt-md-4 pb-5">
-      
-                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
-      
-                    <div class="form-outline form-white mb-4">
-                      <input type="email" id="typeEmailX" class="form-control form-control-lg" />
-                      <label class="form-label" for="typeEmailX">Email</label>
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Login</title>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(to top, #c9c9ff 50%, #9090fa 90%) no-repeat
+        }
+
+        .container {
+            margin: 50px auto
+        }
+
+        .panel-heading {
+            text-align: center;
+            margin-bottom: 10px
+        }
+
+        #forgot {
+            min-width: 100px;
+            margin-left: auto;
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: none
+        }
+
+        .form-inline label {
+            padding-left: 10px;
+            margin: 0;
+            cursor: pointer
+        }
+
+        .btn.btn-primary {
+            margin-top: 20px;
+            border-radius: 15px
+        }
+
+        .panel {
+            min-height: 380px;
+            box-shadow: 20px 20px 80px rgb(218, 218, 218);
+            border-radius: 12px
+        }
+
+        .input-field {
+            border-radius: 5px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            color: #4343ff
+        }
+
+        input[type='text'],
+        input[type='password'] {
+            border: none;
+            outline: none;
+            box-shadow: none;
+            width: 100%
+        }
+
+        .fa-eye-slash.btn {
+            border: none;
+            outline: none;
+            box-shadow: none
+        }
+
+        img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative
+        }
+
+        a[target='_blank'] {
+            position: relative;
+            transition: all 0.1s ease-in-out
+        }
+
+        .bordert {
+            border-top: 1px solid #aaa;
+            position: relative
+        }
+
+        .bordert:after {
+            content: "or connect with";
+            position: absolute;
+            top: -13px;
+            left: 33%;
+            background-color: #fff;
+            padding: 0px 8px
+        }
+
+        @media(max-width: 360px) {
+            #forgot {
+                margin-left: 0;
+                padding-top: 10px
+            }
+
+            body {
+                height: 100%
+            }
+
+            .container {
+                margin: 30px 0
+            }
+
+            .bordert:after {
+                left: 25%
+            }
+        }</style>
+        <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+        <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'></script>
+    </head>
+    <body class='snippet-body'>
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+                    <div class="panel border bg-white">
+                        <div class="panel-heading">
+                            <h3 class="pt-3 font-weight-bold">Login</h3>
+                        </div>
+                        <div class="panel-body p-3">
+                            <form action="{{ route('authenticate') }}" method="POST">
+                                @csrf
+                                <div class="form-group py-2">
+                                    <div class="input-field"> <span class="far fa-user p-2"></span>
+                                        <input type="text" name="email" placeholder="Email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group py-1 pb-2">
+                                    <div class="input-field"> <span class="fas fa-lock px-2"></span>
+                                        <input type="password" name="password" placeholder="Password" required>
+                                    </div>
+                                </div>
+                                <div class="form-inline">
+                                    <a href="{{ route('main') }}" class="font-weight-bold">Ortga qaytish</a>
+                                    <a href="#" id="forgot" class="font-weight-bold">Forgot password?</a>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                                <div class="text-center pt-4 text-muted">Don't have an account?
+                                    <a href="{{ route('register') }}">Sign up</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-      
-                    <div class="form-outline form-white mb-4">
-                      <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                      <label class="form-label" for="typePasswordX">Password</label>
-                    </div>
-      
-                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
-      
-                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-      
-                    <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                      <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                      <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                      <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-                    </div>
-      
-                  </div>
-      
-                  <div>
-                    <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
-                    </p>
-                  </div>
-      
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
-</x-layouts.auth>
+        <script type='text/javascript'></script>
+    </body>
+    </html>
