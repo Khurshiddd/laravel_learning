@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,10 +20,16 @@ Route::post('logout',[AuthController::class,'logout'])->name('logout');
 Route::get('register',[AuthController::class,'register'])->name('register');
 Route::post('register',[AuthController::class,'register_store'])->name('register.store');
 
+
+Route::middleware('auth')->group(function(){
+    Route::get('notifications/{notification}/read',[NotificationController::class,'read'])->name('notifications.read');
+});
+
 Route::resources([
     'posts'=> PostController::class,
     'comments'=> CommentController::class,
-    'users'=> UserController::class
+    'users'=> UserController::class,
+    'notifications' => NotificationController::class,
 ]);
 
 

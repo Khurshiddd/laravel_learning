@@ -10,6 +10,10 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\UploadBigFile;
+use App\Notifications\PostCreated as NotificationsPostCreated;
+use Illuminate\Support\Facades\Notification;
+
 
 class PostController extends Controller
 {
@@ -62,12 +66,11 @@ class PostController extends Controller
 
         PostCreated::dispatch($post);
 
+        Notification::send(auth()->user(), new NotificationsPostCreated($post));
+
         return redirect()->back();
     }
 
-    /**
-    * Display the specified resource.
-    */
     public function show(Post $post)
     {
         return view('posts.show')->with([
@@ -108,6 +111,9 @@ class PostController extends Controller
             'content' => $request->content,
             'photo' => $path ?? $post->photo
         ]);
+
+        UploadBigFile::dispatch($post);
+
         return redirect()->route('posts.show',['post'=>$post->id]);
     }
 

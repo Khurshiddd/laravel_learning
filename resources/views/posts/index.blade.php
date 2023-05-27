@@ -10,9 +10,9 @@
     </x-page-header>
 
     <!-- Blog Start -->
-    
-        
-    
+
+
+
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row align-items-end mb-4">
@@ -34,7 +34,7 @@
                             <small class="text-white text-uppercase">ID</small>
                         </div>
                     </div>
-                    <div class="d-flex mb-2">
+                    <div class="d-flex mb-2 w-100 flex-wrap">
                         @foreach ($post->tags as $tag)
                             <a class="text-secondary text-uppercase font-weight-medium">{{$tag->name}}</a>
                             <span class="text-primary px-2">|</span>
@@ -49,7 +49,7 @@
                 </div>
                 @endforeach
                 {{$posts->links()}}
-                
+
                 {{-- <div class="col-12">
                     <nav aria-label="Page navigation">
                         <ul class="pagination pagination-lg justify-content-center mb-0">

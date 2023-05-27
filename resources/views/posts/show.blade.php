@@ -51,9 +51,9 @@
                     @foreach ($post->comments as $comment)
                     <div class="media mb-4">
                         <img src="/img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px;">
-                        <div class="media-body">
+                        <div class="media-body w-150 flex-wrap">
                             <h6> {{$comment->user->name}} <small><i>{{$comment->created_at}}</i></small></h6>
-                            <p>{{$comment->body}}</p>
+                            <p class="w-150 flex-wrap">{{$comment->body}}</p>
                         </div>
                     </div>
                     @endforeach
