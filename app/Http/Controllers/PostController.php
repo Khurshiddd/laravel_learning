@@ -7,7 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use App\Jobs\UploadBigFile;
@@ -27,7 +27,12 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->paginate(6);
+        // $posts = Post::latest()->paginate(6);
+        Cache::pull('posts');
+        $posts = Cache::remember('posts', now()->addSeconds(30), function () {
+            return Post::latest()->get();
+        });
+
         return view('posts.index')->with('posts',$posts);
     }
 
